@@ -30,7 +30,6 @@ a:hover { color: var(--brand); }
 button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
 button:disabled { cursor: wait; opacity: 0.65; }
 .page-width { width: 90%; max-width: 1120px; margin: 0 auto; }
-.is-hidden { display: none; }
 
 /* Session 4: Flexbox keeps the brand, form, and small controls aligned. */
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-4) 0; border-bottom: 1px solid var(--border); }
@@ -88,11 +87,63 @@ input::placeholder { color: var(--muted); }
 }
 @media (min-width: 1024px) {
   .site-header { padding: var(--sp-5) 0; }
-  .intro { display: grid; grid-template-columns: 1.5fr 1fr; align-items: end; padding: var(--sp-6) 0; }
-  .intro > .eyebrow { grid-column: 1 / -1; }
+  .intro { display: grid; grid-template-columns: 1.5fr 1fr; grid-template-areas: "label label" "title description"; align-items: end; padding: var(--sp-6) 0; }
+  .intro > .eyebrow { grid-area: label; }
+  .intro h1 { grid-area: title; }
   h1 { font-size: 4.5rem; }
-  .intro-copy { justify-self: end; padding-bottom: var(--sp-2); }
+  .intro-copy { grid-area: description; margin-left: auto; padding-bottom: var(--sp-2); }
   .search-panel { padding: var(--sp-5); }
   .empty-state { padding: var(--sp-6); }
   .empty-coordinate { display: inline; margin-left: auto; color: var(--muted); font-size: 0.6875rem; letter-spacing: 2px; }
 }
+
+/* Sessions 4 and 5: Grid defines the result panels; Flexbox aligns their content. */
+.weather-layout { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); }
+.current-card { min-width: 0; padding: var(--sp-4); background: var(--brand-soft); border: 1px solid var(--border); border-radius: var(--radius); }
+.current-card-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-2); }
+.current-card .eyebrow { color: var(--brand); }
+.day-pill { padding: var(--sp-1) var(--sp-2); border: 1px solid var(--brand); border-radius: 24px; font-size: 0.625rem; font-weight: 700; letter-spacing: 1px; color: var(--brand); }
+.location-name { margin-top: var(--sp-4); font-size: 2rem; font-weight: 500; line-height: 1.2; overflow-wrap: anywhere; }
+.location-region { margin-top: var(--sp-1); color: var(--muted); font-size: 0.8125rem; }
+.temperature-row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); margin: var(--sp-3) 0 var(--sp-2); }
+.temperature { font-size: 4rem; font-weight: 500; letter-spacing: -3px; line-height: 1.2; }
+.weather-icon { font-size: 4rem; line-height: 1.2; }
+.weather-description { font-size: 1.125rem; }
+.observation-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.live-label { color: var(--brand); font-size: 0.625rem; font-weight: 700; letter-spacing: 1px; }
+.observation-row p { color: var(--muted); font-size: 0.625rem; }
+.details-card { min-width: 0; padding: var(--sp-4); border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
+.weather-details { margin-top: var(--sp-3); }
+.detail-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-2); padding: var(--sp-4) 0; border-bottom: 1px solid var(--border); }
+.detail-row dt { display: flex; align-items: center; gap: var(--sp-3); color: var(--muted); font-size: 0.875rem; }
+.detail-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%; font-size: 1.25rem; color: var(--brand); }
+.detail-row dd { font-size: 1.375rem; font-weight: 500; }
+.details-note { margin-top: var(--sp-4); color: var(--muted); font-size: 0.75rem; }
+.forecast-section { margin-top: var(--sp-5); }
+.forecast-section h2 { margin-top: var(--sp-2); font-size: 1.375rem; }
+.forecast-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-3); padding: 0; margin: var(--sp-4) 0 0; list-style: none; }
+.forecast-card { min-width: 0; padding: var(--sp-4); border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
+.forecast-card h3 { margin: 0; font-size: 1rem; font-weight: 600; }
+.forecast-date { margin-top: var(--sp-1); color: var(--muted); font-size: 0.75rem; }
+.forecast-icon { display: block; margin: var(--sp-3) 0; font-size: 2.5rem; line-height: 1.2; }
+.forecast-description { color: var(--muted); font-size: 0.8125rem; }
+.forecast-temperatures { margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); font-size: 0.875rem; }
+
+@media (min-width: 600px) {
+  .current-card, .details-card { padding: var(--sp-5); }
+  .temperature { font-size: 5.5rem; }
+  .weather-icon { font-size: 5rem; }
+  .forecast-grid { grid-template-columns: repeat(3, 1fr); }
+  .forecast-card { display: flex; flex-direction: column; }
+  .forecast-temperatures { margin-top: auto; }
+  .forecast-description { margin-bottom: var(--sp-3); }
+}
+@media (min-width: 1024px) {
+  .weather-layout { grid-template-columns: 1.2fr 1fr; }
+  .location-name { font-size: 2.5rem; }
+  .temperature { font-size: 6rem; }
+  .forecast-section { margin-top: var(--sp-6); }
+}
+
+/* Keep this utility last so it also hides buttons that normally use display:flex. */
+.is-hidden { display: none; }
