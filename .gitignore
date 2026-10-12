@@ -1,0 +1,14 @@
+# Keep credentials and local machine files out of every submission.
+.env
+.env.*
+!.env.example
+config.local.js
+config.local.json
+node_modules/
+.DS_Store
+Thumbs.db
+*.zip
+
+# Documentation is kept outside this repository.
+/README.md
+/docs/

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple weather dashboard with live conditions and a three-day outlook for your city.">
+  <title>Atmos | Weather Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header page-width">
+    <a class="brand" href="index.html" aria-label="Atmos home"><span class="brand-mark" aria-hidden="true">a.</span> atmos<span class="brand-dot">/</span></a>
+    <span class="header-note">A window to the weather.</span>
+  </header>
+
+  <main class="page-width">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">YOUR DAILY WEATHER, SIMPLIFIED</p>
+      <h1 id="page-title">A little clarity<br>for your day<span class="accent">.</span></h1>
+      <p class="intro-copy">Around the corner or across the world.<br>Find out what the sky has in store.</p>
+    </section>
+
+    <section class="search-panel" aria-labelledby="search-heading">
+      <div class="section-heading">
+        <h2 id="search-heading">Where are we looking?</h2>
+        <span class="section-number" aria-hidden="true">01 / SEARCH</span>
+      </div>
+      <!-- A real form makes both the Search button and Enter submit the city. -->
+      <form id="search-form" role="search">
+        <label for="city-input">City name</label>
+        <div class="search-row">
+          <input id="city-input" name="city" type="search" placeholder="e.g. Beirut" maxlength="100" required aria-describedby="search-help">
+          <button id="search-button" class="button button-primary" type="submit">Check weather <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="search-help" class="help-text">Search a city, then check the matched region below.</p>
+      </form>
+      <div class="suggestions">
+        <span>Somewhere to start</span>
+        <button type="button" class="city-button" data-city="Beirut">Beirut <span aria-hidden="true">↗</span></button>
+        <button type="button" class="city-button" data-city="London">London <span aria-hidden="true">↗</span></button>
+        <button type="button" class="city-button" data-city="Tokyo">Tokyo <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <!-- One status region announces loading, success, and recoverable errors. -->
+    <div id="feedback" class="feedback" data-state="idle" role="status" aria-live="polite">
+      <span id="loading-dot" class="loading-dot is-hidden" aria-hidden="true"></span>
+      <p id="status-message">Ready when you are. Search for a city to get started.</p>
+      <button id="retry-button" class="button button-secondary is-hidden" type="button">Try again <span aria-hidden="true">↗</span></button>
+    </div>
+
+    <section id="empty-state" class="empty-state" aria-labelledby="empty-heading">
+      <span class="empty-icon" aria-hidden="true">☀</span>
+      <div>
+        <p class="eyebrow">A WORLD OF WEATHER</p>
+        <h2 id="empty-heading">Your next view starts here.</h2>
+        <p>Pick a city above. We’ll bring you current conditions<br class="desktop-break"> and a little look ahead.</p>
+      </div>
+      <span class="empty-coordinate" aria-hidden="true">N / E / S / W</span>
+    </section>
+
+    <!-- Results stay hidden until a complete API response arrives. -->
+    <div id="weather-results" class="is-hidden">
+      <section class="weather-layout" aria-label="Current weather">
+        <div id="current-card" class="current-card">
+          <div class="current-card-top">
+            <p class="eyebrow">CURRENT CONDITIONS</p>
+            <span id="day-period" class="day-pill"></span>
+          </div>
+          <h2 id="location-name" class="location-name"></h2>
+          <p id="location-region" class="location-region"></p>
+          <div class="temperature-row">
+            <p id="temperature" class="temperature"></p>
+            <span id="weather-icon" class="weather-icon" role="img"></span>
+          </div>
+          <p id="weather-description" class="weather-description"></p>
+          <div class="observation-row">
+            <span class="live-label">● LIVE WEATHER</span>
+            <p id="observation-time"></p>
+          </div>
+        </div>
+
+        <div class="details-card">
+          <div class="section-heading">
+            <h2>The finer details</h2>
+            <span class="section-number" aria-hidden="true">02 / NOW</span>
+          </div>
+          <dl class="weather-details">
+            <div class="detail-row">
+              <dt><span class="detail-icon" aria-hidden="true">≈</span> Feels like</dt>
+              <dd id="feels-like"></dd>
+            </div>
+            <div class="detail-row">
+              <dt><span class="detail-icon" aria-hidden="true">◉</span> Humidity</dt>
+              <dd id="humidity"></dd>
+            </div>
+            <div class="detail-row">
+              <dt><span class="detail-icon" aria-hidden="true">↝</span> Wind speed</dt>
+              <dd id="wind-speed"></dd>
+            </div>
+          </dl>
+          <p class="details-note">A quick snapshot, wherever your day takes you.</p>
+        </div>
+      </section>
+
+      <section class="forecast-section" aria-labelledby="forecast-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow">PLAN A LITTLE AHEAD</p><h2 id="forecast-heading">On the horizon</h2></div>
+          <span class="section-number">3-DAY OUTLOOK</span>
+        </div>
+        <ul id="forecast-list" class="forecast-grid"></ul>
+      </section>
+    </div>
+
+    <noscript><p class="feedback">Please enable JavaScript to search for live weather.</p></noscript>
+  </main>
+
+  <footer class="site-footer page-width">
+    <p>Different skies. One simple view.</p>
+    <p>Weather by <a href="https://open-meteo.com/">Open-Meteo</a><span aria-hidden="true"> ↗</span></p>
+  </footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
