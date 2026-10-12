@@ -9,6 +9,5 @@ node_modules/
 Thumbs.db
 *.zip
 
-# Documentation is kept outside this repository.
-/README.md
+# Local supporting documentation.
 /docs/
